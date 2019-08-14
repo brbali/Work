@@ -1,27 +1,27 @@
 #include <iostream>
-#include <array>
 using namespace std;
-void findIndexes(int arr[8], int target, int& n1, int& n2, int arrLength); //passing n1 and n2 by reference to ensure the values are stored
+void findIndexes(int * p, int target, int& n1, int& n2, int arrLength); //passing n1 and n2 by reference to ensure the values are stored
 int main(){
-    int n1 = 0;
-    int n2 = 0;
+    int n1 = 0, n2 = 0;
     int target = 8;
-    int arr[8]={1,2,3,4,5,5,4,9};
+    int arr[4]={1,3,5,9};
+    int * p;
+    p= arr;
     int len = sizeof(arr)/4;
 
-    findIndexes(arr, target, n1, n2, len);
+    findIndexes(p, target, n1, n2, len);
     cout<<"The indexes are: "<<n1<< " and "<<n2;
     return 0;
 }
-void findIndexes(int arr[4], int target, int& i1, int& i2, int arrLength){
-    for(int i=0; i<arrLength; i++){
-        for(int a=i+1; a<arrLength; a++){
-            cout<<arr[i]<<"+"<<arr[a]<<"="<<arr[i]+arr[a]<<'\n';
-            if(arr[i]+arr[a]==target){
-                i1 = i;
-                i2 = a;
-                return;
-            }
+void findIndexes(int * p, int target, int& i1, int& i2, int arrLength){
+    int end = arrLength-1;
+    for(int x=0;x<arrLength;x++){
+        if(p[x]+p[end]==target){
+            i1 = x;
+            i2 = end;
+            cout<<"yes";
+        } else if(p[x]+p[end]>target){
+            end -=1;
         }
     }
 }
